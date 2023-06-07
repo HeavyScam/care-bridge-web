@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.about-box {
+  /* Drop Shadow/High */
+  box-shadow: 0px 20px 50px rgba(18, 17, 39, 0.08);
+}
+
+.mantine-Accordion-label{
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.mantine-Accordion-item{
+  border-bottom: 4px solid #000000;
+  border-radius: 4px;
+}

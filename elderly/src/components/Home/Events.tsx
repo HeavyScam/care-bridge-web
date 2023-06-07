@@ -29,6 +29,7 @@ function Events() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
+            className="w-full"
           >
             <path
               d="M0 16C0 7.16344 7.16344 0 16 0H344C352.837 0 360 7.16344 360 16V203H0V16Z"
@@ -65,7 +66,7 @@ function Events() {
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint. Velit officia consequat.
           </p>
-          <p className="flex items-center px-4 text-2xl font-semibold text-[#444BD3]">
+          <p className="flex items-center px-4 mb-4 text-2xl font-semibold text-[#444BD3]">
             Join the Event
             <svg
               width="20"
@@ -90,6 +91,7 @@ function Events() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
+            className="w-full"
           >
             <path
               d="M0 16C0 7.16344 7.16344 0 16 0H344C352.837 0 360 7.16344 360 16V203H0V16Z"
@@ -135,6 +137,7 @@ function Events() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
+            className="w-full"
           >
             <path
               d="M0 16C0 7.16344 7.16344 0 16 0H344C352.837 0 360 7.16344 360 16V203H0V16Z"
