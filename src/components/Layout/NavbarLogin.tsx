@@ -40,9 +40,8 @@ function Navbar() {
         />
         <div className="hidden lg:flex">
           <div className="flex list-none items-center gap-8 text-2xl">
-            <Link href="#about">About us</Link>
-            <Link href="#partners">Our Partners</Link>
-            <Link href="#faqs">FAQs</Link>
+            <Link href="#events">Events</Link>
+            <Link href="#blogs">Blogs</Link>
             <button
               className={`rounded-lg ${
                 isLogin
@@ -96,16 +95,12 @@ function Navbar() {
             />
           </svg>
           <div className="cursor-pointer text-left text-2xl text-[#f7f7f7]" onClick={handleNav}>
-            <Link href="#about">
-              <p className="mb-3 mt-6 px-4">About Us</p>
+            <Link href="#events">
+              <p className="mb-3 mt-6 px-4">Events</p>
             </Link>
             <hr className="border-[#4c4c4c80]" />
-            <Link href="#partners">
-              <p className="my-3 px-4">Our Partners</p>
-            </Link>
-            <hr className="border-[#4c4c4c80]" />
-            <Link href="#faqs">
-              <p className="my-3 px-4">FAQs</p>
+            <Link href="#blogs">
+              <p className="my-3 px-4">Blogs</p>
             </Link>
           </div>
         </div>
