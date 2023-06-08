@@ -14,6 +14,13 @@ function SignupForm(props: SignupFormProps) {
 
   const userSchema = z
     .object({
+      name: z
+        .string({
+          required_error: "Required",
+          invalid_type_error: "Name must be a string",
+        })
+        .min(3, "Name must be atleast 3 characters long")
+        .max(50, "Name must be less than 50 characters long"),
       email: z
         .string({
           required_error: "Required",
@@ -41,6 +48,7 @@ function SignupForm(props: SignupFormProps) {
 
   const formik = useFormik({
     initialValues: {
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -51,11 +59,14 @@ function SignupForm(props: SignupFormProps) {
       try {
         if (!process.env.NEXT_PUBLIC_SERVER_URL) return;
         const send = {
+          name: values.name,
           email: values.email,
           password: values.password,
+          role: "VOLUNTEER",
+          
         };
         const { data } = await axios.post<signupData>(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/create`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/vol/create`,
           send
         );
         if (data.status === "success") {
@@ -80,6 +91,33 @@ function SignupForm(props: SignupFormProps) {
         className="mt-10 grid grid-cols-12 text-base font-normal text-black"
       >
         <div className="col-span-10 lg:col-span-7">
+          <label htmlFor="name" className="block text-lg font-medium leading-6">
+            Name
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autoComplete="name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Name"
+              className={`block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#fff999] sm:text-sm sm:leading-6 
+              ${
+                touched.name && errors.name
+                  ? "ring-2 ring-inset ring-red-500"
+                  : ""
+              }`}
+            />
+            <span className="text-lg text-red-500">
+              {touched.name && errors.name}
+            </span>
+          </div>
+        </div>
+
+        <div className="col-span-10 mt-8 lg:col-span-7">
           <label
             htmlFor="email"
             className="block text-lg font-medium leading-6"
@@ -164,6 +202,87 @@ function SignupForm(props: SignupFormProps) {
             />
             <span className="text-lg text-red-500">
               {touched.confirmPassword && errors.confirmPassword}
+            </span>
+          </div>
+        </div>
+
+        <div className="col-span-10 lg:col-span-7">
+          <label htmlFor="name" className="block text-lg font-medium leading-6">
+            Name
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autoComplete="name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Name"
+              className={`block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#fff999] sm:text-sm sm:leading-6 
+              ${
+                touched.name && errors.name
+                  ? "ring-2 ring-inset ring-red-500"
+                  : ""
+              }`}
+            />
+            <span className="text-lg text-red-500">
+              {touched.name && errors.name}
+            </span>
+          </div>
+        </div>
+
+        <div className="col-span-10 lg:col-span-7">
+          <label htmlFor="name" className="block text-lg font-medium leading-6">
+            Name
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autoComplete="name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Name"
+              className={`block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#fff999] sm:text-sm sm:leading-6 
+              ${
+                touched.name && errors.name
+                  ? "ring-2 ring-inset ring-red-500"
+                  : ""
+              }`}
+            />
+            <span className="text-lg text-red-500">
+              {touched.name && errors.name}
+            </span>
+          </div>
+        </div>
+
+        <div className="col-span-10 lg:col-span-7">
+          <label htmlFor="name" className="block text-lg font-medium leading-6">
+            Name
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autoComplete="name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Name"
+              className={`block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#fff999] sm:text-sm sm:leading-6 
+              ${
+                touched.name && errors.name
+                  ? "ring-2 ring-inset ring-red-500"
+                  : ""
+              }`}
+            />
+            <span className="text-lg text-red-500">
+              {touched.name && errors.name}
             </span>
           </div>
         </div>

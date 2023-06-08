@@ -42,7 +42,7 @@ function Navbar() {
           <div className="flex list-none items-center gap-8 text-2xl">
             <Link href="#events">Events</Link>
             <Link href="#blogs">Blogs</Link>
-            <button
+            {/* <button
               className={`rounded-lg ${
                 isLogin
                   ? "border border-[#444BD3] bg-[#fff] text-black"
@@ -50,7 +50,7 @@ function Navbar() {
               } px-6 py-2 text-center `}
             >
               {isLogin ? "Log Out" : "Log In"}
-            </button>
+            </button> */}
           </div>
         </div>
         <div

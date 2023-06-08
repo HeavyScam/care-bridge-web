@@ -20,24 +20,6 @@ const Home: NextPage = () => {
         <About />
         <Partners />
         <FAQs />
-        <div className="mx-[10%]">
-          <p className="mb-5 text-left text-2xl font-bold lg:text-4xl ">
-            Want to know more about the latest trends in health?
-          </p>
-          <p className="mt-10 text-left text-2xl font-bold text-[#444BD3] lg:text-4xl">
-            Sign up for our newsletter!
-          </p>
-          <div className="flex flex-col lg:flex-row my-10">
-            <input
-              type="text"
-              placeholder="Enter your email address"
-              className="mb-5 w-full lg:w-1/3 rounded-md border-2 border-[#444BD3] px-5 py-3 lg:mb-0"
-            />
-            <button className="w-full rounded-md bg-[#444BD3] px-5 py-3 text-white lg:w-fit lg:ml-4">
-              Subscribe
-            </button>
-          </div>
-        </div>
       </main>
     </>
   );

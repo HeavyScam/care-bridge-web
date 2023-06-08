@@ -4,13 +4,15 @@ import axios from "axios";
 
 const getToken = async (): Promise<string | undefined> => {
   const refreshToken = localStorage.getItem("refreshToken");
+  console.log(refreshToken);
+  
   if (!refreshToken) {
     void Router.push("../");
   }
   if (!process.env.NEXT_PUBLIC_SERVER_URL) return;
   const url:
     | string
-    | undefined = `${process.env.NEXT_PUBLIC_SERVER_URL}/users/refresh`;
+    | undefined = `${process.env.NEXT_PUBLIC_SERVER_URL}/user/refresh`;
   try {
     // const response = await fetch(url, {
     //   method: "POST",
@@ -36,11 +38,11 @@ const getToken = async (): Promise<string | undefined> => {
     if (data.status === "true") {
       return data.accessToken;
     } else {
-      void Router.push("/signin");
+      void Router.push("/");
     }
   } catch (err) {
     // console.log(err);
-    void Router.push("/signin");
+    void Router.push("/");
   }
 };
 

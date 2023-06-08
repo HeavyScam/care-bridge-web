@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleNav = () => {
     setIsOpen(!isOpen);
@@ -43,7 +43,7 @@ function Navbar() {
             <Link href="#about">About us</Link>
             <Link href="#partners">Our Partners</Link>
             <Link href="#faqs">FAQs</Link>
-            <button
+            {/* <button
               className={`rounded-lg ${
                 isLogin
                   ? "border border-[#444BD3] bg-[#fff] text-black"
@@ -51,7 +51,7 @@ function Navbar() {
               } px-6 py-2 text-center `}
             >
               {isLogin ? "Log Out" : "Log In"}
-            </button>
+            </button> */}
           </div>
         </div>
         <div

@@ -2,6 +2,9 @@ import React from "react";
 import { z } from "zod";
 import { useFormik } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+import axios, { AxiosError } from "axios";
+import { type loginData } from "@/types/api";
+import Router from "next/router";
 
 interface SignupFormProps {
   setForm: React.Dispatch<React.SetStateAction<string>>;
@@ -35,8 +38,27 @@ function LoginForm(props: SignupFormProps) {
     },
     validationSchema: toFormikValidationSchema(userSchema),
     validateOnChange: true,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        if (!process.env.NEXT_PUBLIC_SERVER_URL) return;
+        const { data } = await axios.post<loginData>(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`,
+          values
+        );
+        console.log(data);
+        if (data.status === "true") {
+          localStorage.setItem("refreshToken", data.token);
+          console.log(data.token);
+          
+          void Router.push("/home");
+        }
+      } catch (err) {
+        console.log(err);
+        // if (axios.isAxiosError(err)) {
+        //   const error = err as AxiosError<loginData>;
+        //   console.log(error.response?.data);
+        // }
+      }
     },
   });
 

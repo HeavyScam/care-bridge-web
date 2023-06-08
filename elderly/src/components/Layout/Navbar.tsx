@@ -1,33 +1,37 @@
-// import getToken from "@/utils/GetAccessToken";
+import getToken from "@/utils/GetAccessToken";
 import Image from "next/image";
 import Link from "next/link";
+import Router from "next/router";
 import React, { useEffect, useState } from "react";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleNav = () => {
     setIsOpen(!isOpen);
   };
 
-  // const refreshToken = localStorage.getItem("refreshToken");
+  let refreshToken: string | null = "";
+  if (typeof window !== "undefined") {
+    refreshToken = localStorage.getItem("refreshToken");
+  }
 
-  // useEffect(() => {
-  //   const func = async () => {
-  //     if (!refreshToken) {
-  //       setIsLogin(false);
-  //       return;
-  //     }
-  //     const accessToken = await getToken();
-  //     if (accessToken) {
-  //       setIsLogin(true);
-  //     }
-  //   };
+  useEffect(() => {
+    const func = async () => {
+      if (!refreshToken) {
+        setIsLogin(false);
+        return;
+      }
+      const accessToken = await getToken();
+      if (accessToken) {
+        setIsLogin(true);
+      }
+    };
 
-  //   void func();
-  // }, [refreshToken]);
-
+    void func();
+  }, [refreshToken]);
+  
   return (
     <>
       <nav className="mx-[10%] my-5 flex items-center justify-between">
@@ -36,14 +40,15 @@ function Navbar() {
           alt="logo"
           width={100}
           height={100}
-          className="h-[100px] w-[150px] lg:w-[200px]"
+          className="h-[100px] w-[150px] lg:w-[200px] cursor-pointer"
+          onClick={() => void Router.push("/")}
         />
         <div className="hidden lg:flex">
           <div className="flex list-none items-center gap-8 text-2xl">
             <Link href="#about">About us</Link>
             <Link href="#partners">Our Partners</Link>
             <Link href="#faqs">FAQs</Link>
-            <button
+            {/* <button
               className={`rounded-lg ${
                 isLogin
                   ? "border border-[#444BD3] bg-[#fff] text-black"
@@ -51,7 +56,7 @@ function Navbar() {
               } px-6 py-2 text-center `}
             >
               {isLogin ? "Log Out" : "Log In"}
-            </button>
+            </button> */}
           </div>
         </div>
         <div
@@ -107,6 +112,8 @@ function Navbar() {
             <Link href="#faqs">
               <p className="my-3 px-4">FAQs</p>
             </Link>
+            {/* <hr className="border-[#4c4c4c80]" />
+            <p className="my-3 px-4">Log In</p> */}
           </div>
         </div>
       )}

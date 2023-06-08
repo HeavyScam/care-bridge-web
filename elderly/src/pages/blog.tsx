@@ -1,9 +1,9 @@
-import { type event } from "@/types/api";
+import { type blog } from "@/types/api";
 import Head from "next/head";
 import Router from "next/router";
 import React from "react";
 
-function Event() {
+function Blog() {
   let data: string | null = "";
   if (typeof window !== "undefined") {
     data = localStorage.getItem("data");
@@ -11,8 +11,8 @@ function Event() {
   if (!data) {
     void Router.push("/home");
   }
-  const event: event = JSON.parse(data);
-  console.log(event);
+  const blog: blog = JSON.parse(data);
+  //   console.log(blog);
   return (
     <>
       <Head>
@@ -40,10 +40,9 @@ function Event() {
               />
             </svg>
           </div>
-          <p className="my-10 text-3xl font-bold lg:text-5xl">{event.title}</p>
+          <p className="my-10 text-3xl font-bold lg:text-5xl">{blog.title}</p>
           <div className="mb-20 flex flex-col">
-            <p className="mb-5 text-xl">{`Location: ${event.location}`}</p>
-
+            <p className="mb-5 text-xl">{blog.author}</p>
             <svg
               width="1128"
               height="auto"
@@ -84,12 +83,8 @@ function Event() {
             </svg>
 
             <p className="my-10 mb-10 text-xl lg:text-3xl">
-              {event.description}
+              {blog.description}
             </p>
-
-            <button className="mx-auto rounded-md bg-[#444BD3] px-5 py-3 text-center text-3xl text-white">
-              Register
-            </button>
           </div>
         </div>
       </main>
@@ -97,4 +92,4 @@ function Event() {
   );
 }
 
-export default Event;
+export default Blog;

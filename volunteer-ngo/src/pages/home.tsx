@@ -1,5 +1,5 @@
-import Blogs from "@/components/Home/Blogs";
-import Events from "@/components/Home/Events";
+
+import Reviews from "@/components/Home/Reviews";
 import Hero from "@/components/Home/Hero";
 import Navbar from "@/components/Layout/NavbarLogin";
 import { type NextPage } from "next";
@@ -16,8 +16,7 @@ const Home: NextPage = () => {
       <main>
         <Navbar />
         <Hero />
-        <Events />
-        <Blogs/>
+        <Reviews />
       </main>
     </>
   );

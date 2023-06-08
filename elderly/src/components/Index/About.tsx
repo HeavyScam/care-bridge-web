@@ -49,8 +49,8 @@ function About() {
                 y2="36"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#DEDEDE" />
-                <stop offset="1" stop-color="#DEDEDE" stop-opacity="0" />
+                <stop stopColor="#DEDEDE" />
+                <stop offset="1" stopColor="#DEDEDE" stop-opacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -73,8 +73,8 @@ function About() {
               fill="url(#paint0_linear_52_2739)"
             />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M17.0572 33.0572C17.5778 32.5365 18.4221 32.5365 18.9428 33.0572L27.6094 41.7238C28.1301 42.2445 28.1301 43.0887 27.6094 43.6094C27.0887 44.1301 26.2445 44.1301 25.7238 43.6094L17.0572 34.9428C16.5365 34.4221 16.5365 33.5778 17.0572 33.0572Z"
               fill="#90ECF4"
             />
@@ -91,8 +91,8 @@ function About() {
                 y2="36"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#DEDEDE" />
-                <stop offset="1" stop-color="#DEDEDE" stop-opacity="0" />
+                <stop stopColor="#DEDEDE" />
+                <stop offset="1" stopColor="#DEDEDE" stop-opacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -124,8 +124,8 @@ function About() {
               fill="#444BD3"
             />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M9.33329 42.6667C10.8061 42.6667 12 41.4728 12 40C12 38.5273 10.8061 37.3334 9.33329 37.3334C7.86053 37.3334 6.66663 38.5273 6.66663 40C6.66663 41.4728 7.86053 42.6667 9.33329 42.6667ZM25.8856 41.8857C26.3857 41.3856 26.6666 40.7073 26.6666 40H24L21.3333 40C21.3333 40.7073 21.6142 41.3856 22.1143 41.8857C22.6144 42.3858 23.2927 42.6667 24 42.6667C24.7072 42.6667 25.3855 42.3858 25.8856 41.8857Z"
               fill="#444BD3"
             />
@@ -138,8 +138,8 @@ function About() {
                 y2="36"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#DEDEDE" />
-                <stop offset="1" stop-color="#DEDEDE" stop-opacity="0" />
+                <stop stopColor="#DEDEDE" />
+                <stop offset="1" stopColor="#DEDEDE" stop-opacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -183,8 +183,8 @@ function About() {
                 y2="36"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#DEDEDE" />
-                <stop offset="1" stop-color="#DEDEDE" stop-opacity="0" />
+                <stop stopColor="#DEDEDE" />
+                <stop offset="1" stopColor="#DEDEDE" stop-opacity="0" />
               </linearGradient>
             </defs>
           </svg>

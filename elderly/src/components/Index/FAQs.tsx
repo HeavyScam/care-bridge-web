@@ -3,7 +3,7 @@ import { Accordion } from "@mantine/core";
 function FAQs() {
   return (
     <div id="faqs" className="mx-[10%] my-10">
-      <h1 className="text-left text-2xl font-bold text-[#444BD3] ">
+      <h1 className="text-left text-2xl font-bold text-[#444BD3] mb-5">
         Frequently Asked Questions
       </h1>
       <Accordion>

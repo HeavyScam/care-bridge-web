@@ -35,6 +35,9 @@ dependencies:
   react:
     specifier: 18.2.0
     version: 18.2.0
+  react-audio-voice-recorder:
+    specifier: ^1.2.0
+    version: 1.2.0(react-dom@18.2.0)(react@18.2.0)
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
@@ -3043,6 +3046,27 @@ packages:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
     dev: true
+
+  /react-audio-visualize@1.0.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-fjLmgL48mc6nwtVrf1WgetpjqODRjupgpBM5C7pwU7F4snJVS5C4TdO9cL4TkfwZ4ELUI/5w+gW6UQNco2YgPg==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /react-audio-voice-recorder@1.2.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-rWvzVueIwEj56nJw/zjtcZbWjRdhFUxnMDNmXMZs1rHY8RosUKpsZhoaxXrr+4hsXTFrNnxgBbS8bDdCTWIRlg==}
+    peerDependencies:
+      react: '>=16.2.0'
+      react-dom: '>=16.2.0'
+    dependencies:
+      react: 18.2.0
+      react-audio-visualize: 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}

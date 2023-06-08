@@ -1,6 +1,7 @@
-// import getToken from "@/utils/GetAccessToken";
+import getToken from "@/utils/GetAccessToken";
 import Image from "next/image";
 import Link from "next/link";
+import Router from "next/router";
 import React, { useEffect, useState } from "react";
 
 function Navbar() {
@@ -11,22 +12,31 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
-  // const refreshToken = localStorage.getItem("refreshToken");
+  let refreshToken: string | null = "";
+  if (typeof window !== "undefined") {
+    refreshToken = localStorage.getItem("refreshToken");
+  }
 
-  // useEffect(() => {
-  //   const func = async () => {
-  //     if (!refreshToken) {
-  //       setIsLogin(false);
-  //       return;
-  //     }
-  //     const accessToken = await getToken();
-  //     if (accessToken) {
-  //       setIsLogin(true);
-  //     }
-  //   };
+  useEffect(() => {
+    const func = async () => {
+      if (!refreshToken) {
+        setIsLogin(false);
+        return;
+      }
+      const accessToken = await getToken();
+      if (accessToken) {
+        setIsLogin(true);
+      }
+    };
 
-  //   void func();
-  // }, [refreshToken]);
+    void func();
+  }, [refreshToken]);
+
+  const logout = () => {
+    localStorage.clear();
+    setIsLogin(false);
+    void Router.push("/");
+  };
 
   return (
     <>
@@ -36,13 +46,15 @@ function Navbar() {
           alt="logo"
           width={100}
           height={100}
-          className="h-[100px] w-[150px] lg:w-[200px]"
+          className="h-[100px] w-[150px] lg:w-[200px] cursor-pointer"
+          onClick={() =>void Router.push("/")}
         />
         <div className="hidden lg:flex">
           <div className="flex list-none items-center gap-8 text-2xl">
             <Link href="#events">Events</Link>
             <Link href="#blogs">Blogs</Link>
             <button
+              onClick={logout}
               className={`rounded-lg ${
                 isLogin
                   ? "border border-[#444BD3] bg-[#fff] text-black"
@@ -94,7 +106,10 @@ function Navbar() {
               d="M17.999 4l-6.293 6.293L5.413 4 4 5.414l6.292 6.293L4 18l1.413 1.414 6.293-6.292 6.293 6.292L19.414 18l-6.294-6.293 6.294-6.293z"
             />
           </svg>
-          <div className="cursor-pointer text-left text-2xl text-[#f7f7f7]" onClick={handleNav}>
+          <div
+            className="cursor-pointer text-left text-2xl text-[#f7f7f7]"
+            onClick={handleNav}
+          >
             <Link href="#events">
               <p className="mb-3 mt-6 px-4">Events</p>
             </Link>
@@ -102,6 +117,8 @@ function Navbar() {
             <Link href="#blogs">
               <p className="my-3 px-4">Blogs</p>
             </Link>
+            <hr className="border-[#4c4c4c80]" />
+            <p className="my-3 px-4" onClick={logout}>Log Out</p>
           </div>
         </div>
       )}
