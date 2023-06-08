@@ -4,7 +4,7 @@ import axios from "axios";
 
 const getToken = async (): Promise<string | undefined> => {
   const refreshToken = localStorage.getItem("refreshToken");
-  console.log(refreshToken);
+  // console.log(refreshToken);
   
   if (!refreshToken) {
     void Router.push("../");

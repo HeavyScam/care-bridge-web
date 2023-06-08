@@ -14,7 +14,7 @@ function Blogs() {
       const { data } = await axios.get<blogsData>(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/blog/findall`
       );
-      console.log(data);
+      // console.log(data);
       if (data.status === "success") setBlogs(data.blogs);
     } catch (err) {
       console.log(err);

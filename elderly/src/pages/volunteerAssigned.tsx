@@ -1,55 +1,115 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Navbar from "@/components/Layout/NavbarLogin";
+import getToken from "@/utils/GetAccessToken";
+import axios from "axios";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function VolunteerAssigned() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [unfulfilled, setUnfulfilled] = useState<Array<any>>([]);
 
-    const [isOpen, setIsOpen] = useState(false);
+  const showFeedback = () => {
+    setIsOpen(true);
+  };
 
-    const showFeedback = () => {
-        setIsOpen(true);
-    }
+  const closeFeedback = () => {
+    setIsOpen(false);
+  };
 
-    const closeFeedback = () => {
-        setIsOpen(false);
-    }
-
-    const feedback = (
-        <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">    
-                <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-                    <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                    <div>
-                        <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                            <svg className="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M8 11a4 4 0 118 0m0 0v4m0-4h-4"></path>
-                            </svg>
-                        </div>
-                        <div className="mt-3 text-center sm:mt-5">
-                            <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                Feedback
-                            </h3>
-                            <div className="mt-2">
-                                <p className="text-sm text-gray-500">
-                                    How was your experience with Vaibhav?
-                                </p>
-                            </div>
-                            <textarea className="mt-2 border-2 border-gray-300 rounded-md p-2 w-full h-32" placeholder="Enter your feedback here..."/>
-                        </div>
-                    </div>
-                    <div className="mt-5 sm:mt-6">
-                        <button onClick={closeFeedback} type="button" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#56B280] text-base font-medium text-white hover:bg-[#3E8E6B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#56B280] sm:text-sm">
-                            Submit
-                        </button>
-                    </div>
-                </div>
-            </div>
+  const feedback = (
+    <div className="fixed inset-0 z-10 overflow-y-auto">
+      <div className="flex min-h-screen items-center justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0">
+        <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
-    );
+        <span
+          className="hidden sm:inline-block sm:h-screen sm:align-middle"
+          aria-hidden="true"
+        >
+          &#8203;
+        </span>
+        <div
+          className="inline-block transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:align-middle"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-headline"
+        >
+          <div>
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+              <svg
+                className="h-6 w-6 text-green-600"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M8 11a4 4 0 118 0m0 0v4m0-4h-4"
+                ></path>
+              </svg>
+            </div>
+            <div className="mt-3 text-center sm:mt-5">
+              <h3
+                className="text-lg font-medium leading-6 text-gray-900"
+                id="modal-headline"
+              >
+                Feedback
+              </h3>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">
+                  How was your experience with Vaibhav?
+                </p>
+              </div>
+              <textarea
+                className="mt-2 h-32 w-full rounded-md border-2 border-gray-300 p-2"
+                placeholder="Enter your feedback here..."
+              />
+            </div>
+          </div>
+          <div className="mt-5 sm:mt-6">
+            <button
+              onClick={closeFeedback}
+              type="button"
+              className="inline-flex w-full justify-center rounded-md border border-transparent bg-[#56B280] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#3E8E6B] focus:outline-none focus:ring-2 focus:ring-[#56B280] focus:ring-offset-2 sm:text-sm"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const getUnfulfilledRequests = async () => {
+    try {
+      const accessToken = getToken();
+      if (!process.env.NEXT_PUBLIC_SERVER_URL) return;
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/request/findall`
+      );
+      setUnfulfilled(data.requests);
+      // return res;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    void getUnfulfilledRequests();
+  }, []);
 
   return (
     <>
@@ -64,29 +124,37 @@ function VolunteerAssigned() {
           <span className="text-[#444BD3]">Vaibhav</span> has been assigned as
           your volunteer!
         </p>
-
-        <div className="volunteer-box my-4 flex flex-col gap-4 rounded-xl p-5 text-lg">
-          <div className="flex items-center">
-            <svg
-              width="100"
-              height="100"
-              viewBox="0 0 100 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="50" cy="50" r="40" fill="#CCCCCF" />
-            </svg>
-            <p className="ml-5">Name</p>
+        {unfulfilled.map((request: any, index) => (
+          <div key={index} className="volunteer-box my-4 flex flex-col gap-4 rounded-xl p-5 text-lg">
+            <div className="flex items-center">
+              {/* <svg
+                width="100"
+                height="100"
+                viewBox="0 0 100 100"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="50" cy="50" r="40" fill="#CCCCCF" />
+              </svg> */}
+              <p className="ml-5">{`Task: ${request.title}`}</p>
+            </div>
+            <p className="ml-5">{`Category: ${request.category}`}</p>
+            <p className="ml-5">
+            {`Description: ${request.description}`}
+          </p>
+            <div className="flex flex-col items-center gap-4 lg:flex-row ml-5">
+              <button
+                className="w-full rounded-md bg-[#56B280] px-5 py-3 text-white lg:w-fit "
+                onClick={showFeedback}
+              >
+                Task Completed
+              </button>
+              <button className="w-full rounded-md border-2 px-5 py-3 lg:w-fit">
+                Cancel Task
+              </button>
+            </div>
           </div>
-          <div className="flex flex-col lg:flex-row gap-4 items-center">
-            <button className="w-full rounded-md bg-[#56B280] px-5 py-3 text-white lg:w-fit " onClick={showFeedback}>
-              Task Completed
-            </button>
-            <button className="w-full rounded-md border-2 px-5 py-3 lg:w-fit">
-              Cancel Task
-            </button>
-          </div>
-        </div>
+        ))}
         {isOpen && feedback}
       </main>
     </>

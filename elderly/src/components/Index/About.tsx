@@ -50,7 +50,7 @@ function About() {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stopColor="#DEDEDE" />
-                <stop offset="1" stopColor="#DEDEDE" stop-opacity="0" />
+                <stop offset="1" stopColor="#DEDEDE" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -92,7 +92,7 @@ function About() {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stopColor="#DEDEDE" />
-                <stop offset="1" stopColor="#DEDEDE" stop-opacity="0" />
+                <stop offset="1" stopColor="#DEDEDE" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -139,7 +139,7 @@ function About() {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stopColor="#DEDEDE" />
-                <stop offset="1" stopColor="#DEDEDE" stop-opacity="0" />
+                <stop offset="1" stopColor="#DEDEDE" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -184,7 +184,7 @@ function About() {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stopColor="#DEDEDE" />
-                <stop offset="1" stopColor="#DEDEDE" stop-opacity="0" />
+                <stop offset="1" stopColor="#DEDEDE" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>

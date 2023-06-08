@@ -24,3 +24,7 @@
 .audio-recorder {
   display: inline-block;
 }
+
+audio{
+display: none;
+}

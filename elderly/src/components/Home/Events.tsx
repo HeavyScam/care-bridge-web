@@ -14,7 +14,7 @@ function Events() {
       const { data } = await axios.get<eventsData>(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/event/findall`
       );
-      console.log(data);
+      // console.log(data);
       if (data.status === "success") setEvents(data.events);
     } catch (err) {
       console.log(err);

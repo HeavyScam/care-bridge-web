@@ -1,8 +1,33 @@
+"use client";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Navbar from "@/components/Layout/NavbarLogin";
 import Head from "next/head";
+import Router from "next/router";
 import React from "react";
 
-function volunteers() {
+interface volunteer {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  gender: string;
+  phone: string;
+  address: string;
+  category: Array<string>;
+  ngo: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+function Volunteers() {
+  // let data: string | null = "";
+  // if (typeof window !== "undefined") {
+  //   data = localStorage.getItem("volunteers");
+  // }
+  // // if (!data) {
+  // //   void Router.push("/home");
+  // // }
+  // const volunteers: Array<volunteer> = JSON.parse(data as string);
   return (
     <>
       <Head>
@@ -15,8 +40,11 @@ function volunteers() {
         <p className="my-5 mb-20 text-left text-2xl font-bold lg:text-5xl">
           Available Volunteers:
         </p>
-
-        <div className="volunteer-box my-4 flex flex-col gap-4 text-lg rounded-xl p-5">
+        {/* {volunteers.map((volunteer: volunteer, index) => ( */}
+        <div
+          // key={index}
+          className="volunteer-box my-4 flex flex-col gap-4 rounded-xl p-5 text-lg"
+        >
           <div className="flex items-center">
             <svg
               width="100"
@@ -27,20 +55,28 @@ function volunteers() {
             >
               <circle cx="50" cy="50" r="40" fill="#CCCCCF" />
             </svg>
+            {/* <p className="ml-5">{volunteer.name}</p> */}
             <p className="ml-5">Name</p>
           </div>
-            <p>
-              Vaibhav is a compassionate volunteer who selflessly gives his time
-              and skills to make a positive impact. His dedication and empathy
-              bring joy and support to those he serves in the community.
-            </p>
-            <button className="w-full rounded-md bg-[#56B280] px-5 py-3 text-white lg:w-fit lg:ml-auto">
-                Confirm
-            </button>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+            sit nihil modi necessitatibus minima, non nobis dignissimos ea ex
+            illum. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Similique, ex!
+          </p>
+          <button
+            className="w-full rounded-md bg-[#56B280] px-5 py-3 text-white lg:ml-auto lg:w-fit"
+            onClick={() => {
+              void Router.push("/volunteerAssigned");
+            }}
+          >
+            Confirm
+          </button>
         </div>
+        {/* ))} */}
       </main>
     </>
   );
 }
 
-export default volunteers;
+export default Volunteers;

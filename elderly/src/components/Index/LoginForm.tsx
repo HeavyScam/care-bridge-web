@@ -17,18 +17,13 @@ function LoginForm(props: SignupFormProps) {
     email: z
       .string({
         required_error: "Required",
-        invalid_type_error: "Email must be a string",
-      })
-      .email("Enter a valid email"),
+        invalid_type_error: "Phone must be a string",
+      }),
     password: z
       .string({
         required_error: "Required",
         invalid_type_error: "Password must be a string",
-      })
-      .regex(
-        /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-        "Password should contain atleast 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character"
-      ),
+      }),
   });
 
   const formik = useFormik({
@@ -45,10 +40,10 @@ function LoginForm(props: SignupFormProps) {
           `${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`,
           values
         );
-        console.log(data);
+        // console.log(data);
         if (data.status === "true") {
           localStorage.setItem("refreshToken", data.token);
-          console.log(data.token);
+          // console.log(data.token);
           
           void Router.push("/home");
         }
@@ -75,18 +70,17 @@ function LoginForm(props: SignupFormProps) {
             htmlFor="email"
             className="block text-lg font-medium leading-6"
           >
-            Email
+            Phone Number
           </label>
           <div className="mt-2">
             <input
-              type="email"
+              type="text"
               name="email"
               id="email"
-              autoComplete="email"
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Email"
+              placeholder="Phone Number"
               className={`block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#fff999] sm:text-sm sm:leading-6 
               ${
                 touched.email && errors.email

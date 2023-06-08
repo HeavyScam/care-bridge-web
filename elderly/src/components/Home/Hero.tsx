@@ -1,10 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import Image, { type StaticImageData } from "next/image";
 import React, { useEffect, useState } from "react";
 import hero from "./hero.svg";
 import { useAudioRecorder, AudioRecorder } from "react-audio-voice-recorder";
+import axios from "axios";
+import { useFormik } from "formik";
+import Router from "next/router";
 
 function Hero() {
+  const [open, setIsOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [categories, setCategories] = useState("");
+  const [allowSubmit, setAllowSubmit] = useState(false);
   const recorderControls = useAudioRecorder();
   const addAudioElement = (blob: Blob | MediaSource) => {
     const url = URL.createObjectURL(blob);
@@ -14,28 +25,118 @@ function Hero() {
     document.body.appendChild(audio);
   };
 
+  const formik = useFormik({
+    initialValues: {
+      textarea: "",
+    },
+    onSubmit: async (values) => {
+      await classifyText(values.textarea);
+    },
+  });
+
+  const classifyText = async (text: string) => {
+    setIsOpen(true);
+    try {
+      if (!process.env.NEXT_PUBLIC_ML_URL) return;
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_ML_URL}/classify`,
+        {
+          text,
+        }
+      );
+      setText(text);
+      setCategories(data.classification);
+      // console.log(data);
+      setAllowSubmit(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const classifyAudio = async (blob: BlobPart | undefined) => {
+    if (!blob) return;
+    setIsOpen(true);
+    try {
+      if (!process.env.NEXT_PUBLIC_ML_URL) return;
+      const file = new File([blob], "prompt.webm", {
+        type: "audio/webm",
+      });
+      const formData = new FormData();
+      formData.append("file", file);
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_ML_URL}/classify_audio`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setText(data.transcribed_text);
+      setCategories(data.classification);
+      // console.log(data);
+      setAllowSubmit(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getVolunteers = async (categories: string) => {
+    try {
+      if (!process.env.NEXT_PUBLIC_SERVER_URL) return;
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/request/classify`,
+        {
+          categories,
+        }
+      );
+      // console.log(data);
+      localStorage.setItem("volunteers", JSON.stringify(data.classify));
+      void Router.push("/volunteers");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
   useEffect(() => {
-    console.log(recorderControls.recordingBlob);
+    // console.log(recorderControls.recordingBlob);
+    void classifyAudio(recorderControls.recordingBlob);
   }, [recorderControls.stopRecording]);
 
   return (
-    <div className="mb-10 flex items-center">
-      <div className="mx-[10%] flex flex-col lg:w-1/2 ">
-        <h1 className="text-4xl font-bold lg:text-6xl">
-          Please tell us what you need!
-          <br /> We are <span className="text-[#444BD3]">here to help.</span>
-        </h1>
-        <textarea
-          className="mt-10 h-40 w-full rounded-md border-2 border-[#444BD3] p-5  "
-          placeholder="Enter your message here"
-        />
-        <p className="my-5 text-center text-2xl  font-semibold">OR</p>
-        <button className="mx-auto w-full rounded-md bg-[#444BD3] px-5 py-3 text-white flex items-center justify-center">
-        <AudioRecorder
-          onRecordingComplete={(blob) => addAudioElement(blob)}
-          recorderControls={recorderControls}
-        />
-          {/* <svg
+    <>
+      <div className="mb-10 flex items-center">
+        <div className="mx-[10%] flex flex-col lg:w-1/2 ">
+          <h1 className="text-4xl font-bold lg:text-6xl">
+            Please tell us what you need!
+            <br /> We are <span className="text-[#444BD3]">here to help.</span>
+          </h1>
+          <form onSubmit={formik.handleSubmit}>
+            <textarea
+              className="mt-10 h-40 w-full rounded-md border-2 border-[#444BD3] p-5  "
+              placeholder="Enter your message here"
+              id="textarea"
+              name="textarea"
+              value={formik.values.textarea}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            <button
+              type="submit"
+              className="mx-auto mt-2 flex w-full items-center justify-center rounded-md bg-[#444BD3] px-5 py-3 text-white"
+            >
+              <p className="ml-2">Request Task</p>
+            </button>
+          </form>
+          <p className="my-5 text-center text-2xl  font-semibold">OR</p>
+          <button className="mx-auto flex w-full items-center justify-center rounded-md bg-[#444BD3] px-5 py-3 text-white">
+            <AudioRecorder
+              onRecordingComplete={(blob) => addAudioElement(blob)}
+              recorderControls={recorderControls}
+            />
+            {/* <svg
             className="mr-2 inline-block"
             width="32"
             height="32"
@@ -50,19 +151,98 @@ function Hero() {
               fill="white"
             />
           </svg> */}
-          <p className="ml-2">Voice Prompt</p>
-        </button>
-      </div>
+            <p className="ml-2">Voice Prompt</p>
+          </button>
+        </div>
 
-      <div className="ml-auto hidden lg:block">
-        <Image
-          src={hero as StaticImageData}
-          alt="hero"
-          width={500}
-          height={500}
-        />
+        <div className="ml-auto hidden lg:block">
+          <Image
+            src={hero as StaticImageData}
+            alt="hero"
+            width={500}
+            height={500}
+          />
+        </div>
       </div>
-    </div>
+      {open && (
+        <div className="fixed inset-0 z-10 overflow-y-auto">
+          <div className="flex min-h-screen items-center justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0">
+            <div
+              className="fixed inset-0 transition-opacity"
+              aria-hidden="true"
+            >
+              <div className="absolute inset-0 bg-gray-500 opacity-75" />
+            </div>
+            <span
+              className="hidden sm:inline-block sm:h-screen sm:align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <div
+              className="inline-block transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:align-middle"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-headline"
+            >
+              <div>
+                <div onClick={() => setIsOpen(false)}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-x"
+                    width="44"
+                    height="44"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#2c3e50"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M18 6l-12 12" />
+                    <path d="M6 6l12 12" />
+                  </svg>
+                </div>
+                <div className="mt-3 text-center sm:mt-5">
+                  <h3
+                    className="text-lg font-medium leading-6 text-gray-900"
+                    id="modal-headline"
+                  >
+                    Request
+                  </h3>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      This is your request
+                    </p>
+                  </div>
+                  <textarea
+                    className="mt-2 h-32 w-full rounded-md border-2 border-gray-300 p-2"
+                    value={text}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className="mt-5 sm:mt-6">
+                <button
+                  disabled={!allowSubmit}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setAllowSubmit(false);
+                    // void getVolunteers(categories);
+                    void Router.push("/volunteers");
+                  }}
+                  type="button"
+                  className="inline-flex w-full justify-center rounded-md border border-transparent bg-[#56B280] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#3E8E6B] focus:outline-none focus:ring-2 focus:ring-[#56B280] focus:ring-offset-2 sm:text-sm"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

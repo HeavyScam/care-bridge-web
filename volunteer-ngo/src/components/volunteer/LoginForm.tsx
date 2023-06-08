@@ -45,10 +45,10 @@ function LoginForm(props: SignupFormProps) {
           `${process.env.NEXT_PUBLIC_SERVER_URL}/vol/login`,
           values
         );
-        console.log(data);
+        // console.log(data);
         if (data.status === "true") {
           localStorage.setItem("refreshToken", data.token);
-          console.log(data.token);
+          // console.log(data.token);
           
           void Router.push("/home");
         }
