@@ -9,9 +9,9 @@ function Blog() {
   if (typeof window !== "undefined") {
     data = localStorage.getItem("data");
   }
-  if (!data) {
-    void Router.push("/home");
-  }
+  // if (!data) {
+  //   void Router.push("/home");
+  // }
   const blog: blog = JSON.parse(data as string);
   //   console.log(blog);
   return (

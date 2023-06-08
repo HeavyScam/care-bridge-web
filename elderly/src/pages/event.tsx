@@ -10,9 +10,9 @@ function Event() {
   if (typeof window !== "undefined") {
     data = localStorage.getItem("data");
   }
-  if (!data) {
-    void Router.push("/home");
-  }
+  // if (!data) {
+  //   void Router.push("/home");
+  // }
   const event: event = JSON.parse(data as string);
   // console.log(event);
   return (
