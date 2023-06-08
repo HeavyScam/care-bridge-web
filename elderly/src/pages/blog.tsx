@@ -59,7 +59,7 @@ function Blog() {
               <path
                 d="M0 12C0 5.37258 5.37258 0 12 0H1116C1122.63 0 1128 5.37258 1128 12V369C1128 375.627 1122.63 381 1116 381H12C5.37258 381 0 375.627 0 369V12Z"
                 fill="black"
-                fill-opacity="0.4"
+                fillOpacity="0.4"
               />
               <defs>
                 <pattern

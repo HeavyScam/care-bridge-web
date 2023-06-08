@@ -1,23 +1,23 @@
-"use-client";
+"use client";
 import Image, { type StaticImageData } from "next/image";
 import React, { useEffect, useState } from "react";
 import hero from "./hero.svg";
-import { AudioRecorder } from "react-audio-voice-recorder";
+import AudioRecorder from "@/utils/AudioRec";
 
 function Hero() {
+  const [audio, setAudio] = useState(false);
 
-  const addAudioElement = (blob) => {
-    const url = URL.createObjectURL(blob);
-    const audio = document.createElement("audio");
-    audio.src = url;
-    audio.controls = true;
-    document.body.appendChild(audio);
-  };
+  // const addAudioElement = (blob) => {
+  //   const url = URL.createObjectURL(blob);
+  //   const audio = document.createElement("audio");
+  //   audio.src = url;
+  //   audio.controls = true;
+  //   document.body.appendChild(audio);
+  // };
 
-
-  //   useEffect(() => {
-  //     console.log(form);
-  //     }, [form]);
+  useEffect(() => {
+    setAudio(true);
+  }, []);
 
   return (
     <div className="mb-10 flex items-center">
@@ -26,15 +26,18 @@ function Hero() {
           Please tell us what you need!
           <br /> We are <span className="text-[#444BD3]">here to help.</span>
         </h1>
-        {/* <Recorder Render={RecorderUI} /> */}
         <textarea
           className="mt-10 h-40 w-full rounded-md border-2 border-[#444BD3] p-5  "
           placeholder="Enter your message here"
         />
         <p className="my-5 text-center text-2xl  font-semibold">OR</p>
+        {/* <div className={`${audio ? "hidden" : "block"}`}> */}
+          <AudioRecorder />
+          {/* <input type="file" accept="audio/*" /> */}
+        {/* </div> */}
         <button className="mx-auto w-full rounded-md bg-[#444BD3] px-5 py-3 text-white">
           <svg
-          className="inline-block mr-2"
+            className="mr-2 inline-block"
             width="32"
             height="32"
             viewBox="0 0 32 32"
@@ -48,11 +51,11 @@ function Hero() {
               fill="white"
             />
           </svg>
-          Voice Promt
+          Voice Prompt
         </button>
       </div>
 
-      <AudioRecorder 
+      {/* <AudioRecorder 
       onRecordingComplete={addAudioElement}
       audioTrackConstraints={{
         noiseSuppression: true,
@@ -60,7 +63,7 @@ function Hero() {
       }} 
       downloadOnSavePress={true}
       downloadFileExtension="mp3"
-    />
+    /> */}
 
       <div className="ml-auto hidden lg:block">
         <Image

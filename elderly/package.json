@@ -19,6 +19,7 @@
     "formik": "^2.4.1",
     "next": "^13.4.2",
     "react": "18.2.0",
+    "react-audio-recorder": "^2.2.0",
     "react-audio-voice-recorder": "^1.2.0",
     "react-dom": "18.2.0",
     "voice-recorder-react": "^1.1.1",

@@ -63,7 +63,8 @@ function SignupForm(props: SignupFormProps) {
           email: values.email,
           password: values.password,
           role: "VOLUNTEER",
-          
+          phone: "1234567890",
+          gender: "Male"
         };
         const { data } = await axios.post<signupData>(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/vol/create`,
