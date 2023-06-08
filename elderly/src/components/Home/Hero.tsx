@@ -6,7 +6,7 @@ import { useAudioRecorder, AudioRecorder } from "react-audio-voice-recorder";
 
 function Hero() {
   const recorderControls = useAudioRecorder();
-  const addAudioElement = (blob) => {
+  const addAudioElement = (blob: Blob | MediaSource) => {
     const url = URL.createObjectURL(blob);
     const audio = document.createElement("audio");
     audio.src = url;

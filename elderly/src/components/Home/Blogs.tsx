@@ -2,7 +2,7 @@ import { type blog, type blogsData } from "@/types/api";
 import axios from "axios";
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import image from "./image.svg"
 
 function Blogs() {

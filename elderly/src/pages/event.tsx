@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type event } from "@/types/api";
 import Head from "next/head";
 import Router from "next/router";
@@ -11,7 +12,7 @@ function Event() {
   if (!data) {
     void Router.push("/home");
   }
-  const event: event = JSON.parse(data);
+  const event: event = JSON.parse(data as string);
   console.log(event);
   return (
     <>

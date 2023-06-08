@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type blog } from "@/types/api";
 import Head from "next/head";
 import Router from "next/router";
@@ -11,7 +12,7 @@ function Blog() {
   if (!data) {
     void Router.push("/home");
   }
-  const blog: blog = JSON.parse(data);
+  const blog: blog = JSON.parse(data as string);
   //   console.log(blog);
   return (
     <>
